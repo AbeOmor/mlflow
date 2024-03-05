@@ -1,0 +1,99 @@
+# Announcing MLflow Enhancements: Deep Learning with MLflow (Part 1)
+
+[Abe Omorogbe](mailto:abe.omorogbe@databricks.com) [Yun Park](mailto:yun@databricks.com) [Chen Qian](mailto:chen.qian@databricks.com) [Jesse Chan](mailto:jesse.chan@databricks.com) [Hubert Zub](mailto:hubert.zub@databricks.com)
+
+
+In the quickly evolving world of artificial intelligence, where generative AI has taken center stage, the landscape of machine learning is evolving at an unprecedented pace. There has been a surge in the use of cutting-edge deep learning libraries like Transformers, Tensorflow, and PyTorch to fine-tune these generative AI models for enhanced performance. As this trend accelerates, it's become clear that the tools used to build these models most rapidly evolve too—particularly when it comes to managing and optimizing these deep learning workloads. MLflow offers a practical solution for managing the complexities of these machine learning projects.
+
+In collaboration with [MosaicML](https://www.mosaicml.com/) and the broader ML community, MLflow is thrilled to unveil a set of eagerly awaited enhancements. This latest release introduces updated tracking UI capabilities, a direct response to [the feedback](https://www.linkedin.com/posts/mlflow-org_qualtrics-survey-qualtrics-experience-management-activity-7128154257924513793-RCDG?utm_source=share\&utm_medium=member_desktop) and needs of MLflow enthusiasts. These updates are not just incremental; they represent a leap forward in addressing the needs of MLflow users doing Deep learning. 
+
+This evolution is a testament to MLflow's commitment to serving the open-source community, ensuring that its offerings are not just keeping pace but setting the pace in the rapidly evolving domain of machine learning.
+
+
+# Deep Learning API Improvement
+
+Leveraging valuable insights from our user community, we've implemented critical enhancements to scale and system metrics within our platform. These improvements encompass expanded scalability options, support for logging more iterations and logging of system metrics. 
+
+**System Metrics:** This feature allows you to[ monitor system metrics](https://mlflow.org/docs/latest/python_api/mlflow.system_metrics.html?highlight=system%20metrics#mlflow.system_metrics.enable_system_metrics_logging) and identify any hardware issues that might be impacting performance.Metrics such as CPU utilization, Memory usage, disk usage etc., from all nodes in your cluster can now be logged
+
+![](https://lh7-us.googleusercontent.com/2e3KSSnFqLLOGrXt5VsWohR7atd8NdltCymMMOAvk0M_QN4PknNiDldC3M3AgDnwoo0CnoQGkRX0aGFtUjRBDqn0WsAMnjiqQS-_XK0PfkLgWNbjY1mUOn76YNeymHXqTWM9JDjBFUp7hoO1HTWcm5g)
+
+**Improved Logging Performance:** We recently introduced async and batch logging, making it easier to log [parallel/distributed](https://mlflow.org/docs/latest/tracking/tracking-api.html#parallel-runs) DL jobs. Also now the MLflow Client now supports 1M steps/iterations allowing users to log more steps during long-running DL jobs
+
+![](https://lh7-us.googleusercontent.com/Kog86SM6HPJraSUw8kFqiEyta2J5wezUU9h1hk8_q9_fzb_kA0LgpxBfkQRY4NK8bS3c2zmIrlVvMuDJ2ONLVm1ZTNuso1Ejsuqsj3FgBS85JYmX6i2y3TNar2_rnDQNCKJegICx1tpWQyPnri6dhUM)
+
+**Checkpointing for Deep Learning:** Autologging for TensorFlow and PyTorch now supports [checkpointing of model weights](https://mlflow.org/releases/2.11.0#autologging-for-tensorflow-and-pytorch-now-supports-checkpointing-of-model-weights)
+
+![](https://lh7-us.googleusercontent.com/0xfaif6jdPkKgZ4H7FgSgRdjeGmyeqYI-XyxL-uhEOw2LNp_ibfgRv78sAZCaiUi8CX1TpgPcGAurz35RswhyuRc2bME7fgQ65t9koMO_v7G4NiAgmszQyx_i0vrk7kkhTD5hvdSTpw56ijHC1cc3QY)
+
+
+# User Experience and Productivity Enhancements 
+
+We have introduced substantial improvements to user experience and feature organization within our platform. These enhancements include more sophisticated user interfaces and an intuitive redesign of the run details page, the addition of chart groups and metric aggregation, all aimed at simplifying navigation and enhancing productivity especially for Deep Learning use cases. 
+
+**Metric Aggregation:** We've enhanced the UI with metric aggregation, enabling you to aggregate metrics across multiple runs based on datasets, tags, or parameters. This improvement significantly improves time to understand training results when working with  large deep learning models as it enables more nuanced and comprehensive analysis of overarching trends in model performance across multiple dimensions.
+
+****![](https://lh7-us.googleusercontent.com/XXrGxoma6g1-3smSWcYeWWMmYDirMFTW0oKcUCTi2CJ5XWpyG3u9W0gBeHEgii8hOD9iM-uJG_SiMP-7KnNewjCbLyyvHZ082AcK3Knaaj9IDTUfNmOtxVYvkY8gpksf2Otxaekc--IxL5hnaWrMask)****
+
+**Group Charts Functionality:** Now, you can easily categorize and organize your metrics—such as training, testing, and system metrics—into named groups within the UI. This organization allows for a comprehensive overview of all metrics, enabling quicker access and better management, particularly when handling experiments with many metrics.
+
+![](https://lh7-us.googleusercontent.com/H2GW_AQM6QUz01JghDahFRDierGlOG51G1khnLu3tPXL5sRdcmnZU2tfoi4EDZMTMXePcL4hfOz9bN48YaVCKa7P83Uws_npSxh4jEzRE61Beitz5OmydbIuOW3BWjt3siIgiJHHknVJG-8cnEDuTro)
+
+**Slash ("/") Logging Syntax:** To further streamline metric organization, we've implemented a new logging syntax that uses slashes ("/") to group metrics. For example, using mlflow\.log\_metric("x/y/score", 100) helps in structuring and segregating different types of data or metrics into hierarchical groups, making it easier to navigate and interpret the logs, especially when dealing with complex models and experiments. 
+
+****![](https://lh7-us.googleusercontent.com/svcjph5UYU2iRcIUPNmF-ZJ3bfqc1yBtnRF2L35ASsApsQxWqFAGGiuiCA3EgKrAlSEimPmk0eSQara_-bsFUWZmyTGI-4M0c3exGo1YJNkHW1R51RbjBrZEHNzotgovNv30kYkhKwHi9rpw509sbTE)****
+
+****![](https://lh7-us.googleusercontent.com/uozw27F3AlMenjRgKy2YDEkRXkdUQF4Q89SNs-dgpJ_dLqGzuOU1G9C2N-w5VoyzYuckXvl1b8lIs-G7DLmh1-5MqgvFodvI-MZacFWgZzb6UKvb5171dByUhWQ0aXraD2POH0p6_csAXqHACE3qd3I)****
+
+**Chart Searching:**  We've significantly enhanced the search functionality within our platform, enabling more robust and intuitive searching across charts, parameters, and metrics. This upgrade allows for quicker and more precise retrieval of specific data points, streamlining the process of analyzing and comparing different aspects of your experiments.
+
+![](https://lh7-us.googleusercontent.com/ZyTHG2O7lCQP0cr-rwDqmNJyJMd1M4fOBncufMNYlHehM-9f2pljJDoEI1lu3xy5Ike4ogeSbCmzkMwdKw3WwAYYdHifWnwWUsLwqPoDpMzN_ItBZfZ2eWg36vbyxRAQxQyEebRgX9zmborD-9wyM5w)
+
+**Run Details Redesign:** We reorganized the Run Details UI to tabs, added new drag and drop UI and users can now render logged tables. This enhancement will make it easier to organize your runs and experiments. 
+
+![Alt text](gifs/chrome-capture-2024-3-5.gif)
+
+# Getting started Updates
+
+Following extensive feedback from our user community, we've introduced significant updates to enhance the getting started and documentation in MLflow. These updates include a comprehensive overhaul of our documentation for easier navigation and enriched guidance, along with streamlined login API. These enhancements, reflecting our commitment to improving user experience and workflow, aim to empower our users to achieve more with greater speed and ease.
+
+**New Tutorials and Docs:** We've overhauled our documentation to offer a more comprehensive, user-friendly experience with practical examples to support both newcomers and experienced practitioners with the information they need to start a Deep Learning project. [Take a look](https://mlflow.org/docs/latest/deep-learning/index.html)
+
+![](https://lh7-us.googleusercontent.com/aqxvERKXPQurCw1F8_7CFLW9KMNRhYFWjB3bj7fEJGOXJeNLoQLnGJjecoFhpJYVmH1HZsX97vffC4_RoyZVEOYceHKhWuSYCFC3BG3a4rlgsqgPV2iEvJfCn9qOrJpxDvK883HDa2AnXMskk8-ywWI)
+
+**Seamless login with** [**mlflow.login()**](https://mlflow.org/docs/latest/getting-started/tracking-server-overview/index.html#method-2-use-free-hosted-tracking-server-databricks-community-edition)**:** We've streamlined our authentication processes. This method provides a simple way to connect MLflow to your tracking server without having to leave your development environment. [Try it out now](https://mlflow.org/blog/databricks-ce)
+
+![](https://lh7-us.googleusercontent.com/G6xdaj6jwKxlWbLkNWc68XdO2ooUc2NzBpLzXifs9vtjG6yjZ8CXG_V6poJKbuT0nlBtAIvMDKdt_VnbhsBiIeE0F3tYvee-w2FPJwO4AqOTIO_06cW5J7sNj453f3vvKbmxlHVWEG2RVHyRkbVjzFs)
+
+
+# Get Started Today
+
+Dive into the latest MLflow updates today and enhance the way you manage your machine learning projects! With our newest enhancements, including advanced metric aggregation, automatic capturing of system metrics, intuitive feature grouping, and streamlined search capabilities, MLflow is here to elevate your data science workflow to new heights. [Get started now with MLflow's cutting-edge tools and features. ](https://mlflow.org/releases/2.11.0)
+
+```
+pip install mlflow==2.11
+mlflow ui --port 8080
+```
+
+```
+import mlflow
+
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_diabetes
+from sklearn.ensemble import RandomForestRegressor
+
+# Set our tracking server uri for logging
+mlflow.set_tracking_uri(uri="http://127.0.0.1:8080")
+mlflow.autolog()
+
+db = load_diabetes()
+X_train, X_test, y_train, y_test = train_test_split(db.data, db.target)
+rf = RandomForestRegressor(n_estimators=100, max_depth=6, max_features=3)
+
+# MLflow triggers logging automatically upon model fitting
+rf.fit(X_train, y_train)
+```
+
+# Feedback
+
+We value your input! Our feature prioritization is guided by feedback from the MLflow late 2023 survey. Please add feedback in GitHub issues.
